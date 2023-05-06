@@ -36,8 +36,11 @@ class PurchaseDialog(CancelAndHelpDialog):
         """
         purchase_details = step_context.options
 
+        #if purchase_details.transact is False:
+            ### TODO: make a recommendation
+
         if purchase_details.item is None:
-            message_text = "What sort of flowers do you like?"
+            message_text = "What sort of flowers are you looking for?"
             prompt_message = MessageFactory.text(
                 message_text, message_text, InputHints.expecting_input
             )
