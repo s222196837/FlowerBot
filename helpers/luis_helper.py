@@ -64,11 +64,7 @@ class LuisHelper:
                     if recognizer_result.entities.get("item", [{"$instance": {}}])[0][
                         "$instance"
                     ]:
-                        result.item = item_entities[0]["text"].capitalize()
-                    else:
-                        result.unsupported_flowers.append(
-                            item_entities[0]["text"].capitalize()
-                        )
+                        result.set_item(item_entities[0]["text"])
 
                 user_entities = recognizer_result.entities.get("$instance", {}).get(
                     "user", []
@@ -77,11 +73,7 @@ class LuisHelper:
                     if recognizer_result.entities.get("user", [{"$instance": {}}])[0][
                         "$instance"
                     ]:
-                        result.user = user_entities[0]["text"].capitalize()
-                    else:
-                        result.unsupported_flowers.append(
-                            from_entities[0]["text"].capitalize()
-                        )
+                        result.set_user(user_entities[0]["text"])
 
         except Exception as exception:
             print(exception)

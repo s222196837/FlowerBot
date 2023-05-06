@@ -1,8 +1,11 @@
+import os
+import json
+
 from botbuilder.core import MessageFactory, TurnContext
 from botbuilder.dialogs import ComponentDialog, DialogTurnResult
 from botbuilder.dialogs import WaterfallStepContext, WaterfallDialog
 from botbuilder.dialogs.prompts import TextPrompt, PromptOptions
-from botbuilder.schema import InputHints
+from botbuilder.schema import Attachment, InputHints
 
 from purchase_details import PurchaseDetails
 from flower_purchase_recognizer import FlowerPurchaseRecognizer
@@ -106,9 +109,12 @@ class MainDialog(ComponentDialog):
             # Now we have all the purchase details, call the purchase service.
 
             # If the call to the purchase service was successful tell the user.
-            msg_txt = f"Great, I've ordered some {result.item} flowers for you"
-            message = MessageFactory.text(msg_txt, msg_txt, InputHints.ignoring_input)
-            await step_context.context.send_activity(message)
+            delivery_card = self.create_adaptive_card_attachment()
+            delivery_text = f"Great, I've ordered a {result.item} plant for you!"
+            delivery_message = MessageFactory.attachment(
+                delivery_card, delivery_text, InputHints.ignoring_input
+            )
+            await step_context.context.send_activity(delivery_message)
 
         prompt_message = "What else can I do for you?"
         return await step_context.replace_dialog(self.id, prompt_message)
@@ -126,3 +132,15 @@ class MainDialog(ComponentDialog):
                 message_text, message_text, InputHints.ignoring_input
             )
             await context.send_activity(message)
+
+    @staticmethod
+    def create_adaptive_card_attachment():
+        """ Load attachment from file """
+        relative_path = os.path.abspath(os.path.dirname(__file__))
+        path = os.path.join(relative_path, "../cards/deliveryCard.json")
+        with open(path) as in_file:
+            card = json.load(in_file)
+
+        return Attachment(
+            content_type="application/vnd.microsoft.card.adaptive", content=card
+        )

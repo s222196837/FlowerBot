@@ -1,0 +1,21 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "Image",
+      "url": "https://raw.githubusercontent.com/s222196837/FlowerBot/main/images/black_eyed_susan.jpg",
+      "size": "stretch"
+    },
+    {
+      "type": "TextBlock",
+      "spacing": "medium",
+      "size": "default",
+      "weight": "bolder",
+      "text": "Black-Eyed Susan flowers from FlowerBot!",
+      "wrap": true,
+      "maxLines": 0
+    }
+  ]
+}

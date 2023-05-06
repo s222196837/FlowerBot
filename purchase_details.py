@@ -19,9 +19,8 @@ class PurchaseDetails:
         # pick a random ID as there is no account management (nor shop)
         total_users = MAX_USERS
         if user is None:
-            user = str(random.randint(1, total_users))
+            user = random.randint(1, total_users)
         self.user = user
-
         self.item = item
 
         if datetime is None:
@@ -50,3 +49,22 @@ class PurchaseDetails:
         if flower not in self.supported_flowers:
             return None
         return self.supported_flowers[flower]
+
+    def set_item(self, flower):
+        """ set item to canonical name: lowercase, no spaces, singular """
+        flower = flower.lower()
+        flower = flower.replace(' ', '_')
+        flower = flower.replace('  ', '_')
+        flower = flower.rstrip("s")
+        flower = flower.rstrip("'")
+        if flower in self.supported_flowers:
+            self.item = flower
+        else:
+            self.item = None
+
+    def set_user(self, identity):
+        """ set user to ID - when numeric convert into U-prefixed form """
+        if isinstance(identity, int):
+            self.user = 'U' + str(identity).zfill(5)
+        else:
+            self.user = identity
