@@ -1,0 +1,375 @@
+{
+  "luis_schema_version": "3.2.0",
+  "versionId": "0.1",
+  "name": "FlowerPurchase",
+  "desc": "LUIS Model for FlowerBot",
+  "culture": "en-us",
+  "tokenizerVersion": "1.0.0",
+  "intents": [
+    {
+      "name": "PurchaseFlowers"
+    },
+    {
+      "name": "Cancel"
+    },
+    {
+      "name": "RecommendFlowers"
+    },
+    {
+      "name": "None"
+    }
+  ],
+  "entities": [],
+  "composites": [
+    {
+      "name": "Type",
+      "children": [
+        "Flower"
+      ],
+      "roles": []
+    },
+    {
+      "name": "Item",
+      "children": [
+        "Flower"
+      ],
+      "roles": []
+    }
+  ],
+  "closedLists": [
+    {
+      "name": "Flower",
+      "subLists": [
+        {
+          "canonicalForm": "Astilbe",
+          "list": [
+            "astilbe",
+            "false spirea",
+            "false goats beard"
+          ]
+        },
+        {
+          "canonicalForm": "Bellflower",
+          "list": [
+            "bellflower",
+            "bell shaped",
+            "little bell",
+            "bell flower",
+            "campanula"
+          ]
+        },
+        {
+          "canonicalForm": "Black Eyed Susan",
+          "list": [
+            "black_eyed_susan",
+            "black eyed susan"
+          ]
+        },
+        {
+          "canonicalForm": "Calendula",
+          "list": [
+            "calendula",
+            "marigold"
+          ]
+        },
+        {
+          "canonicalForm": "California Poppy",
+          "list": [
+            "golden poppy",
+            "california poppy",
+            "cup of gold",
+            "california sunlight",
+            "poppy"
+          ]
+        },
+        {
+          "canonicalForm": "Carnation",
+          "list": [
+            "clove pink",
+            "flower of god",
+            "carnation"
+          ]
+        },
+        {
+          "canonicalForm": "Common Daisy",
+          "list": [
+            "lawn daisy",
+            "English daisy",
+            "common daisy",
+            "common_daisy",
+            "daisy"
+          ]
+        },
+        {
+          "canonicalForm": "Coreopsis",
+          "list": [
+            "calliopsis",
+            "tickseed",
+            "coreopsis"
+          ]
+        },
+        {
+          "canonicalForm": "Daffodil",
+          "list": [
+            "narcissus",
+            "jonquil",
+            "daffodil"
+          ]
+        },
+        {
+          "canonicalForm": "Dandelion",
+          "list": [
+            "taraxacology",
+            "dandelion"
+          ]
+        },
+        {
+          "canonicalForm": "Iris",
+          "list": [
+            "iris"
+          ]
+        },
+        {
+          "canonicalForm": "Magnolia",
+          "list": [
+            "star magnolia",
+            "magnolia"
+          ]
+        },
+        {
+          "canonicalForm": "Rose",
+          "list": [
+            "English rose",
+            "Rosa",
+            "rosa",
+            "rose"
+          ]
+        },
+        {
+          "canonicalForm": "Sunflower",
+          "list": [
+            "Sun",
+            "sun",
+            "giant",
+            "Sun Flower",
+            "SunFlower",
+            "sunflower"
+          ]
+        },
+        {
+          "canonicalForm": "Tulip",
+          "list": [
+            "blotch",
+            "tulip"
+          ]
+        },
+        {
+          "canonicalForm": "Water Lily",
+          "list": [
+            "Water Lilies",
+            "water lilies",
+            "water lily",
+            "water_lily"
+          ]
+        }
+      ],
+      "roles": []
+    }
+  ],
+  "patternAnyEntities": [],
+  "regex_entities": [],
+  "prebuiltEntities": [],
+  "model_features": [],
+  "regex_features": [],
+  "patterns": [],
+  "utterances": [
+    {
+      "text": "want to buy a flower",
+      "intent": "PurchaseFlowers",
+      "entities": []
+    },
+    {
+      "text": "purchase some flowers",
+      "intent": "PurchaseFlowers",
+      "entities": []
+    },
+    {
+      "text": "girlfriend",
+      "intent": "PurchaseFlowers",
+      "entities": []
+    },
+    {
+      "text": "wife",
+      "intent": "PurchaseFlowers",
+      "entities": []
+    },
+    {
+      "text": "anniversary",
+      "intent": "PurchaseFlowers",
+      "entities": []
+    },
+    {
+      "text": "trying to find some flowers",
+      "intent": "PurchaseFlowers",
+      "entities": []
+    },
+    {
+      "text": "need some colour",
+      "intent": "PurchaseFlowers",
+      "entities": []
+    },
+    {
+      "text": "buy some red roses",
+      "intent": "PurchaseFlowers",
+      "entities": [
+        {
+          "entity": "Flower",
+          "startPos": 14,
+          "endPos": 18
+        }
+      ]
+    },
+    {
+      "text": "get some white roses please",
+      "intent": "PurchaseFlowers",
+      "entities": [
+        {
+          "entity": "Flower",
+          "startPos": 16,
+          "endPos": 20
+        }
+      ]
+    },
+    {
+      "text": "buy astile",
+      "intent": "PurchaseFlowers",
+      "entities": [
+        {
+          "entity": "Flower",
+          "startPos": 4,
+          "endPos": 10
+        }
+      ]
+    },
+    {
+      "text": "buy a beautiful iris",
+      "intent": "PurchaseFlowers",
+      "entities": [
+        {
+          "entity": "Flower",
+          "startPos": 17,
+          "endPos": 20
+        }
+      ]
+    },
+    {
+      "text": "love some tulips",
+      "intent": "PurchaseFlowers",
+      "entities": [
+        {
+          "entity": "Flower",
+          "startPos": 10,
+          "endPos": 15
+        }
+      ]
+    },
+    {
+      "text": "water lily please",
+      "intent": "PurchaseFlowers",
+      "entities": [
+        {
+          "entity": "Flower",
+          "startPos": 0,
+          "endPos": 9
+        }
+      ]
+    },
+    {
+      "text": "something bell shaped",
+      "intent": "PurchaseFlowers",
+      "entities": [
+        {
+          "entity": "Flower",
+          "startPos": 10,
+          "endPos": 13
+        }
+      ]
+    },
+    {
+      "text": "can you suggest some please?",
+      "intent": "RecommendFlowers",
+      "entities": []
+    },
+    {
+      "text": "what flowers would you suggest?",
+      "intent": "RecommendFlowers",
+      "entities": []
+    },
+    {
+      "text": "what types to you like?",
+      "intent": "RecommendFlowers",
+      "entities": []
+    },
+    {
+      "text": "i like all types",
+      "intent": "RecommendFlowers",
+      "entities": []
+    },
+    {
+      "text": "they're all great",
+      "intent": "RecommendFlowers",
+      "entities": []
+    },
+    {
+      "text": "difficult to choose",
+      "intent": "RecommendFlowers",
+      "entities": []
+    },
+    {
+      "text": "cannot decide on my own",
+      "intent": "RecommendFlowers",
+      "entities": []
+    },
+    {
+      "text": "hard time making a choice",
+      "intent": "RecommendFlowers",
+      "entities": []
+    },
+    {
+      "text": "help making a decision",
+      "intent": "RecommendFlowers",
+      "entities": []
+    },
+    {
+      "text": "stop that",
+      "intent": "Cancel",
+      "entities": []
+    },
+    {
+      "text": "bye",
+      "intent": "Cancel",
+      "entities": []
+    },
+    {
+      "text": "cancel purchase",
+      "intent": "Cancel",
+      "entities": []
+    },
+    {
+      "text": "exit",
+      "intent": "Cancel",
+      "entities": []
+    },
+    {
+      "text": "ignore",
+      "intent": "Cancel",
+      "entities": []
+    },
+    {
+      "text": "i don't care",
+      "intent": "None",
+      "entities": []
+    }
+  ],
+  "settings": []
+}
