@@ -49,8 +49,12 @@ class LuisHelper:
                 else None
             )
 
-            if intent == Intent.PURCHASE_FLOWERS.value:
-                result = PurchaseDetails()
+            if intent in [
+                Intent.PURCHASE_FLOWERS.value,
+                Intent.RECOMMEND_FLOWERS.value
+            ]:
+                buynow = (intent == Intent.PURCHASE_FLOWERS.value)
+                result = PurchaseDetails(buynow)
 
                 # Get result from the LUIS JSON - every level returns an array.
                 item_entities = recognizer_result.entities.get("$instance", {}).get(
@@ -75,7 +79,7 @@ class LuisHelper:
                     ]:
                         result.user = user_entities[0]["text"].capitalize()
                     else:
-                        result.unsupported_airports.append(
+                        result.unsupported_flowers.append(
                             from_entities[0]["text"].capitalize()
                         )
 

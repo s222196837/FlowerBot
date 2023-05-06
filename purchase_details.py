@@ -2,16 +2,22 @@ import pandas as pd
 import random
 import time
 
+MAX_USERS = 128
+
 class PurchaseDetails:
     def __init__(
         self,
+        transact: bool = True,
         user: str = None,
         item: str = None,
         datetime: str = None,
         supported_flowers = None,
         unsupported_flowers = None,
     ):
-        total_users = 128 # max
+        self.purchase = transact # alternative is to recommend, not buy
+
+        # pick a random ID as there is no account management (nor shop)
+        total_users = MAX_USERS
         if user is None:
             user = str(random.randint(1, total_users))
         self.user = user

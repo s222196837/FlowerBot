@@ -1,4 +1,5 @@
-from botbuilder.dialogs import WaterfallDialog, WaterfallStepContext, DialogTurnResult
+from botbuilder.dialogs import DialogTurnResult
+from botbuilder.dialogs import WaterfallDialog, WaterfallStepContext
 from botbuilder.dialogs.prompts import ConfirmPrompt, TextPrompt, PromptOptions
 from botbuilder.core import MessageFactory
 from botbuilder.schema import InputHints

@@ -1,13 +1,6 @@
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License.
-
 from datetime import datetime
-from botbuilder.schema import (
-    Activity,
-    ActivityTypes,
-    ChannelAccount,
-    ConversationAccount,
-)
+from botbuilder.schema import Activity, ActivityTypes
+from botbuilder.schema import ChannelAccount, ConversationAccount
 
 
 def create_activity_reply(activity: Activity, text: str = None, locale: str = None):

@@ -1,7 +1,11 @@
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License.
+import os
+import urllib.parse
+import urllib.request
+import base64
+import json
 
 from botbuilder.core import ActivityHandler, ConversationState, UserState, TurnContext
+from botbuilder.schema import Activity, Attachment, AttachmentData
 from botbuilder.dialogs import Dialog
 from helpers.dialog_helper import DialogHelper
 
@@ -34,8 +38,52 @@ class DialogBot(ActivityHandler):
         await self.user_state.save_changes(turn_context, False)
 
     async def on_message_activity(self, turn_context: TurnContext):
-        await DialogHelper.run_dialog(
-            self.dialog,
-            turn_context,
-            self.conversation_state.create_property("DialogState"),
-        )
+        if (turn_context.activity.attachments
+            and len(turn_context.activity.attachments) > 0
+        ):
+            await self.handle_incoming_attachment(turn_context)
+        else:
+            await DialogHelper.run_dialog(
+                self.dialog,
+                turn_context,
+                self.conversation_state.create_property("DialogState"),
+            )
+
+    async def handle_incoming_attachment(self, turn_context: TurnContext):
+        """
+        Handle attachments uploaded by users.
+        The bot receives an Attachment in an Activity.
+        The activity has a list of attachments.
+        """
+        for attachment in turn_context.activity.attachments:
+            attachment_info = await self.download_attachment_and_write(attachment)
+            if "filename" in attachment_info:
+                await turn_context.send_activity(
+                    f"Attachment {attachment_info['filename']} has been received to {attachment_info['local_path']}"
+                )
+
+    async def download_attachment_and_write(self, attachment: Attachment) -> dict:
+        """
+        Retrieve the attachment via the attachments contentUrl.
+        Returns a dictionary with keys "filename", "local_path".
+        """
+        try:
+            response = urllib.request.urlopen(attachment.content_url)
+            headers = response.info()
+
+            # If user uploads JSON file, this prevents it from being written as
+            # "{"type":"Buffer","data":[123,13,10,32,32,34,108..."
+            if headers["content-type"] == "application/json":
+                data = bytes(json.load(response)["data"])
+            else:
+                data = response.read()
+
+            local_filename = os.path.join(os.getcwd(), attachment.name)
+            with open(local_filename, "wb") as out_file:
+                out_file.write(data)
+
+            return {"filename": attachment.name, "local_path": local_filename}
+        except Exception as exception:
+            print(exception)
+            return {}
+

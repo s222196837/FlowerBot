@@ -1,12 +1,5 @@
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License.
-
-from botbuilder.dialogs import (
-    ComponentDialog,
-    DialogContext,
-    DialogTurnResult,
-    DialogTurnStatus,
-)
+from botbuilder.dialogs import ComponentDialog, DialogContext
+from botbuilder.dialogs import DialogTurnResult, DialogTurnStatus
 from botbuilder.schema import ActivityTypes, InputHints
 from botbuilder.core import MessageFactory
 
