@@ -30,15 +30,16 @@ class PurchaseDetails:
             unsupported_flowers = ['dandelion'] # weed
         self.unsupported_flowers = unsupported_flowers
 
-    def load_catalog():
+    def load_catalog(self):
         """ get plant identifiers from the catalog, returns dictionary """
+        flowers = 'data/flowers.catalog'
         columns = ['item', 'name', 'group']
-        catalog = pd.read_csv('flowers.catalog', header=None, names=columns)
+        catalog = pd.read_csv(flowers, header=None, names=columns)
         catalog = pd.DataFrame(catalog, columns=['item', 'name'])
         catalog = dict([(n,i) for n, i in zip(catalog.name, catalog.item)])
         return catalog
 
-    def item_catalog(flower):
+    def item_catalog(self, flower):
         """ lookup a flower in the catalog dictionary, returns item ID """
         if flower not in self.supported_flowers:
             return None

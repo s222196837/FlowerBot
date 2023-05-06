@@ -58,7 +58,7 @@ class PurchaseDialog(CancelAndHelpDialog):
         # Capture the results of the previous step
         purchase_details.item = step_context.result
         message_text = (
-            f"Please confirm, you want to purchase some: { purchase_details.item }?"
+            f"Please confirm, you want to purchase some { purchase_details.item }?"
         )
         prompt_message = MessageFactory.text(
             message_text, message_text, InputHints.expecting_input
