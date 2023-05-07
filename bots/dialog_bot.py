@@ -58,9 +58,25 @@ class DialogBot(ActivityHandler):
         for attachment in turn_context.activity.attachments:
             attachment_info = await self.download_attachment_and_write(attachment)
             if "filename" in attachment_info:
-                await turn_context.send_activity(
-                    f"Attachment {attachment_info['filename']} has been received to {attachment_info['local_path']}"
-                )
+
+                ### TODO: classify this image, send a response ###
+                path = attachment_info['local_path']
+                flower = 'sunflower'
+                #flower = self.purchase_details.classify(path)
+
+                if flower is not None:
+                    if flower[0] in ['a', 'e', 'i', 'o', 'u']:
+                        prefix = 'an'
+                    else:
+                        prefix = 'a'
+                    message_text = (
+                        f"Got it - that looks like {prefix} {flower} to me."
+                    )
+                else:
+                    message_text = (
+                        f"Sorry, I am unable to classify a flower there."
+                    )
+                await turn_context.send_activity(message_text)
 
     async def download_attachment_and_write(self, attachment: Attachment) -> dict:
         """
