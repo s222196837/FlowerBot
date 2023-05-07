@@ -8,10 +8,10 @@ import pandas as pd
 import random
 import time
 
-total_records = 8192
-total_users = 128
-start_date = "2023-01-01T00:00:00"
-end_date = "2023-5-5T00:00:00"
+total_records = 20000
+total_users = 64
+start_date = "2023-05-01T00:00:00"
+end_date = "2023-05-05T00:00:00"
 
 random.seed(0)  # always generate the same output
 
@@ -44,7 +44,7 @@ def string_time(start, end, format, proportion):
     return time.strftime(format, time.localtime(ptime))
 
 def random_date(start, end, proportion):
-    return string_time(start, end, '%Y-%m-%dT%H:%M:%S', proportion)
+    return string_time(start, end, '%Y-%m-%dT00:00:00', proportion)
 
 
 # get plant identifiers from the catalog
@@ -75,5 +75,5 @@ for result in plants:
     itemid = catalog[flower[0]]
     datestamp = random_date(start_date, end_date, random.random())
 
-    print("U%05d,%s,%s" % (userid, itemid, datestamp))
+    print("U%05d,%s,%s,Purchase" % (userid, itemid, datestamp))
 

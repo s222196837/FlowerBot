@@ -7,6 +7,8 @@ from botbuilder.dialogs.prompts import ConfirmPrompt, TextPrompt, PromptOptions
 from botbuilder.core import MessageFactory
 from botbuilder.schema import Attachment, InputHints
 
+from purchase_details import PurchaseDetails
+from .cancel_and_help_dialog import CancelAndHelpDialog
 from .cancel_and_help_dialog import CancelAndHelpDialog
 
 
@@ -66,8 +68,7 @@ class PurchaseDialog(CancelAndHelpDialog):
         # If nothing was found or requested to do so, make a recommendation
         if purchase_details.purchase == False:
 
-            recommendation = 'rose'  # TODO: call recommendation service here
-
+            recommendation = purchase_details.recommendation(purchase_details.item)
             purchase_details.set_item(recommendation)
             message_text = (
                 f"Would you like to buy a { purchase_details.item } plant?"
@@ -75,8 +76,7 @@ class PurchaseDialog(CancelAndHelpDialog):
 
         elif purchase_details.item == None:
 
-            recommendation = 'tulip' # TODO: call recommendation service here
-
+            recommendation = purchase_details.recommendation(None)
             purchase_details.set_item(recommendation)
             message_text = (
                 f"My catalog is limited, would you like a { purchase_details.item } plant instead?"
@@ -106,19 +106,22 @@ class PurchaseDialog(CancelAndHelpDialog):
         :param step_context:
         :return DialogTurnResult:
         """
-        purchase_details = step_context.options
+        if step_context.result:
+            purchase_details = step_context.options
 
-        message_text = (
-            f"Please confirm you want to buy a { purchase_details.item } plant?"
-        )
-        prompt_message = MessageFactory.text(
-            message_text, message_text, InputHints.expecting_input
-        )
+            message_text = (
+                f"Please confirm you want to buy a { purchase_details.item } plant?"
+            )
+            prompt_message = MessageFactory.text(
+                message_text, message_text, InputHints.expecting_input
+            )
+    
+            # Offer a final YES/NO prompt before proceeding with purchase.
+            return await step_context.prompt(
+                ConfirmPrompt.__name__, PromptOptions(prompt=prompt_message)
+            )
 
-        # Offer a final YES/NO prompt before proceeding with purchase.
-        return await step_context.prompt(
-            ConfirmPrompt.__name__, PromptOptions(prompt=prompt_message)
-        )
+        return await step_context.end_dialog()
 
     async def final_step(self, step_context: WaterfallStepContext) -> DialogTurnResult:
         """
@@ -128,10 +131,9 @@ class PurchaseDialog(CancelAndHelpDialog):
         """
         if step_context.result:
             purchase_details = step_context.options
-
-            # TODO: update the recommendation system here
-
+            ## In a real shop update the transation record here ##
             return await step_context.end_dialog(purchase_details)
+
         return await step_context.end_dialog()
 
     @staticmethod
@@ -145,3 +147,4 @@ class PurchaseDialog(CancelAndHelpDialog):
         return Attachment(
             content_type="application/vnd.microsoft.card.adaptive", content=card
         )
+

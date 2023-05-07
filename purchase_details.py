@@ -1,8 +1,16 @@
+from azure.cognitiveservices.vision.customvision.prediction import CustomVisionPredictionClient
+from msrest.authentication import ApiKeyCredentials
+
+from urllib import parse, request
 import pandas as pd
 import random
 import time
+import json
+import os
 
-MAX_USERS = 128
+from config import DefaultConfig
+
+CONFIG = DefaultConfig()
 
 class PurchaseDetails:
     def __init__(
@@ -11,13 +19,12 @@ class PurchaseDetails:
         user: str = None,
         item: str = None,
         datetime: str = None,
-        supported_flowers = None,
         unsupported_flowers = None,
     ):
         self.purchase = transact # alternative is to recommend, not buy
 
         # pick a random ID as there is no account management (nor shop)
-        total_users = MAX_USERS
+        total_users = CONFIG.MAX_USERS
         if user is None:
             user = random.randint(1, total_users)
         self.user = user
@@ -27,13 +34,11 @@ class PurchaseDetails:
             datetime = time.strftime('%Y-%m-%dT%H:%M:%S', time.localtime())
         self.datetime = datetime
 
-        if supported_flowers is None:
-           supported_flowers = self.load_catalog()
-        self.supported_flowers = supported_flowers
-
         if unsupported_flowers is None:
             unsupported_flowers = ['dandelion'] # weed
         self.unsupported_flowers = unsupported_flowers
+
+        self.load_catalog()
 
     def load_catalog(self):
         """ get plant identifiers from the catalog, returns dictionary """
@@ -42,13 +47,21 @@ class PurchaseDetails:
         catalog = pd.read_csv(flowers, header=None, names=columns)
         catalog = pd.DataFrame(catalog, columns=['item', 'name'])
         catalog = dict([(n,i) for n, i in zip(catalog.name, catalog.item)])
-        return catalog
+        self.supported_flowers = catalog
+        inverse = dict([(i,n) for n, i in zip(catalog.name, catalog.item)])
+        self.supported_items = inverse  # reverse lookup
 
     def item_catalog(self, flower):
         """ lookup a flower in the catalog dictionary, returns item ID """
         if flower not in self.supported_flowers:
             return None
         return self.supported_flowers[flower]
+
+    def flower_catalog(self, item):
+        """ lookup an item in the catalog dictionary, returns flower """
+        if item not in self.supported_items:
+            return None
+        return self.supported_items[item]
 
     def set_item(self, flower):
         """ set item to canonical name: lowercase, no spaces, singular """
@@ -68,3 +81,63 @@ class PurchaseDetails:
             self.user = 'U' + str(identity).zfill(5)
         else:
             self.user = identity
+
+
+    def fetch_recommendations(self, itemid):
+        """ fetch recommendation result dict (item-to-item) """
+  
+        url = CONFIG.RECOMMEND_URL + CONFIG.RECOMMEND_MODEL + '/recommend'
+        post = { 'itemId': itemid }
+        data = parse.urlencode(post).encode()
+
+        req = request.Request(url, data=data) # data makes a "POST"
+        req.add_header('Content-Type', 'application/json')
+        req.add_header('x-api-key', CONFIG.RECOMMEND_API_KEY)
+
+        resp = request.urlopen(req)
+        return resp.read()
+
+    def recommendation(self, item):
+        """ query endpoint for top recommendation (item-to-item) """
+        if item is None:
+            item = CONFIG.BEST_FLOWER
+        item_id = self.item_catalog(item)
+
+        recommendations = self.fetch_recommendations(item_id)
+
+        # unpack the result and find the top recommendation
+        max_score = 0.0
+        for recommendation in recommendations:
+            score = recommendation['score']
+            if score >= max_score:
+                max_score = score
+                item_id = recommendation['recommendedItemId'].upper()
+
+        return self.purchases.flower_catalog(item_id)
+
+
+    def fetch_classifications(self, path):
+        """ fetch classification result dict (image-to-tag) """
+
+        cs = ApiKeyCredentials(in_headers={"Prediction-key": CONFIG.CLASSIFY_API_KEY})
+        predictor = CustomVisionPredictionClient(CONFIG.CLASSIFY_URL, cs)
+
+        with open(path, mode="rb") as image:
+            return predictor.detect_image(CONFIG.CLASSIFY_PROJECT, CONFIG.CLASSIFY_ITERATION, image)
+        return []
+
+    def classification(self, path):
+        """ query endpoint for top classification (image-to-tag) """
+       
+        classifications = self.fetch_classifications(path)
+
+        # unpack the result and find the top classification
+        item_tag = None
+        max_score = 0.0
+        for prediction in results.predictions:
+            score = prediction.probability
+            if score >= max_score:
+                max_score = score
+                item_tag = prediction.tag_name
+
+        return item_tag

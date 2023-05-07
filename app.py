@@ -1,9 +1,9 @@
 """
 FlowerBot: identification, recommendation and purchasing, using:
-- [LUIS](https://www.luis.ai) to implement core AI capabilities.
 - [CustomVision](https://www.customvision.ai) to classify photos.
 - Product Recommendation Service to make product recommendations.
 """
+
 from http import HTTPStatus
 
 from aiohttp import web
@@ -18,7 +18,6 @@ from dialogs import MainDialog, PurchaseDialog
 from bots import DialogAndWelcomeBot
 
 from adapter_with_error_handler import AdapterWithErrorHandler
-from flower_purchase_recognizer import FlowerPurchaseRecognizer
 
 CONFIG = DefaultConfig()
 
@@ -34,9 +33,8 @@ CONVERSATION_STATE = ConversationState(MEMORY)
 ADAPTER = AdapterWithErrorHandler(SETTINGS, CONVERSATION_STATE)
 
 # Create dialogs and Bot
-RECOGNIZER = FlowerPurchaseRecognizer(CONFIG)
 PURCHASE_DIALOG = PurchaseDialog()
-DIALOG = MainDialog(RECOGNIZER, PURCHASE_DIALOG)
+DIALOG = MainDialog(PURCHASE_DIALOG)
 BOT = DialogAndWelcomeBot(CONVERSATION_STATE, USER_STATE, DIALOG)
 
 

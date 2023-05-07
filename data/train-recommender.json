@@ -1,0 +1,15 @@
+{
+   "description": "FlowerBot recommendations model",
+   "blobContainerName": "transactions",
+   "usageRelativePath": "users.csv",
+   "catalogFileRelativePath": "flowers.catalog",
+   "supportThreshold": 3,
+   "cooccurrenceUnit": "User",
+   "similarityFunction": "Cooccurrence",
+   "enableColdItemPlacement": true,
+   "enableColdToColdRecommendations": true,
+   "enableUserAffinity": false,
+   "allowSeedItemsInRecommendations": true,
+   "enableBackfilling": true,
+   "decayPeriodInDays": 90
+}

@@ -1,0 +1,21 @@
+{
+  "id": "ebd580dc-6954-4fe0-ac13-fdc45bb22f88",
+  "description": "FlowerBot recommendations model",
+  "creationTime": "2023-05-07T01:22:52.8124645Z",
+  "modelStatus": "Created",
+  "parameters": {
+    "blobContainerName": "transactions",
+    "catalogFileRelativePath": "flowers.catalog",
+    "usageRelativePath": "users.csv",
+    "supportThreshold": 3,
+    "cooccurrenceUnit": "User",
+    "similarityFunction": "Cooccurrence",
+    "enableColdItemPlacement": true,
+    "enableColdToColdRecommendations": true,
+    "enableUserAffinity": false,
+    "enableUserToItemRecommendations": false,
+    "allowSeedItemsInRecommendations": true,
+    "enableBackfilling": true,
+    "decayPeriodInDays": 90
+  }
+}

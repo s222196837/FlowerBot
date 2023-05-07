@@ -1,375 +1,422 @@
 {
-  "luis_schema_version": "3.2.0",
-  "versionId": "0.1",
-  "name": "FlowerPurchase",
-  "desc": "LUIS Model for FlowerBot",
-  "culture": "en-us",
-  "tokenizerVersion": "1.0.0",
-  "intents": [
-    {
-      "name": "PurchaseFlowers"
+    "projectFileVersion": "2022-10-01-preview",
+    "stringIndexType": "Utf16CodeUnit",
+    "metadata": {
+        "projectKind": "Conversation",
+        "projectName": "flowerbot",
+        "multilingual": false,
+        "description": "Conversation Model for FlowerBot",
+        "language": "en-us"
     },
-    {
-      "name": "Cancel"
-    },
-    {
-      "name": "RecommendFlowers"
-    },
-    {
-      "name": "None"
+    "assets": {
+        "projectKind": "Conversation",
+        "intents": [
+            {
+                "category": "Cancel"
+            },
+            {
+                "category": "None"
+            },
+            {
+                "category": "PurchaseFlowers"
+            },
+            {
+                "category": "RecommendFlowers"
+            }
+        ],
+        "entities": [
+            {
+                "category": "Flower",
+                "compositionSetting": "combineComponents",
+                "list": {
+                    "sublists": [
+                        {
+                            "listKey": "Astilbe",
+                            "synonyms": [
+                                {
+                                    "language": "en-us",
+                                    "values": [
+                                        "astilbe",
+                                        "false spirea",
+                                        "false goats beard",
+                                        "astile",
+                                        "Astilbe"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "listKey": "Bellflower",
+                            "synonyms": [
+                                {
+                                    "language": "en-us",
+                                    "values": [
+                                        "bellflower",
+                                        "bell shaped",
+                                        "little bell",
+                                        "bell flower",
+                                        "campanula",
+                                        "bell",
+                                        "Bellflower"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "listKey": "Black Eyed Susan",
+                            "synonyms": [
+                                {
+                                    "language": "en-us",
+                                    "values": [
+                                        "black_eyed_susan",
+                                        "black eyed susan",
+                                        "Black Eyed Susan"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "listKey": "Calendula",
+                            "synonyms": [
+                                {
+                                    "language": "en-us",
+                                    "values": [
+                                        "calendula",
+                                        "marigold",
+                                        "Calendula"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "listKey": "California Poppy",
+                            "synonyms": [
+                                {
+                                    "language": "en-us",
+                                    "values": [
+                                        "golden poppy",
+                                        "california poppy",
+                                        "cup of gold",
+                                        "california sunlight",
+                                        "poppy",
+                                        "California Poppy"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "listKey": "Carnation",
+                            "synonyms": [
+                                {
+                                    "language": "en-us",
+                                    "values": [
+                                        "clove pink",
+                                        "flower of god",
+                                        "carnation",
+                                        "Carnation"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "listKey": "Common Daisy",
+                            "synonyms": [
+                                {
+                                    "language": "en-us",
+                                    "values": [
+                                        "lawn daisy",
+                                        "English daisy",
+                                        "common daisy",
+                                        "common_daisy",
+                                        "daisy",
+                                        "Common Daisy"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "listKey": "Coreopsis",
+                            "synonyms": [
+                                {
+                                    "language": "en-us",
+                                    "values": [
+                                        "calliopsis",
+                                        "tickseed",
+                                        "coreopsis",
+                                        "Coreopsis"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "listKey": "Daffodil",
+                            "synonyms": [
+                                {
+                                    "language": "en-us",
+                                    "values": [
+                                        "narcissus",
+                                        "jonquil",
+                                        "daffodil",
+                                        "Daffodil"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "listKey": "Dandelion",
+                            "synonyms": [
+                                {
+                                    "language": "en-us",
+                                    "values": [
+                                        "taraxacology",
+                                        "dandelion",
+                                        "Dandelion"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "listKey": "Iris",
+                            "synonyms": [
+                                {
+                                    "language": "en-us",
+                                    "values": [
+                                        "iris",
+                                        "Iris"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "listKey": "Magnolia",
+                            "synonyms": [
+                                {
+                                    "language": "en-us",
+                                    "values": [
+                                        "star magnolia",
+                                        "magnolia",
+                                        "Magnolia"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "listKey": "Rose",
+                            "synonyms": [
+                                {
+                                    "language": "en-us",
+                                    "values": [
+                                        "English rose",
+                                        "Rosa",
+                                        "rosa",
+                                        "rose",
+                                        "roses",
+                                        "Rose"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "listKey": "Sunflower",
+                            "synonyms": [
+                                {
+                                    "language": "en-us",
+                                    "values": [
+                                        "Sun",
+                                        "sun",
+                                        "giant",
+                                        "Sun Flower",
+                                        "SunFlower",
+                                        "sunflower",
+                                        "Sunflower"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "listKey": "Tulip",
+                            "synonyms": [
+                                {
+                                    "language": "en-us",
+                                    "values": [
+                                        "blotch",
+                                        "tulip",
+                                        "tulips",
+                                        "Tulip"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "listKey": "Water Lily",
+                            "synonyms": [
+                                {
+                                    "language": "en-us",
+                                    "values": [
+                                        "Water Lilies",
+                                        "water lilies",
+                                        "water lily",
+                                        "water_lily",
+                                        "Water Lily"
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        ],
+        "utterances": [
+            {
+                "text": "anniversary",
+                "intent": "PurchaseFlowers",
+                "entities": []
+            },
+            {
+                "text": "buy a beautiful iris",
+                "intent": "PurchaseFlowers",
+                "entities": []
+            },
+            {
+                "text": "buy an astilbe",
+                "intent": "PurchaseFlowers",
+                "entities": []
+            },
+            {
+                "text": "buy astile",
+                "intent": "PurchaseFlowers",
+                "entities": []
+            },
+            {
+                "text": "buy some red roses",
+                "intent": "PurchaseFlowers",
+                "entities": []
+            },
+            {
+                "text": "bye",
+                "intent": "Cancel",
+                "entities": []
+            },
+            {
+                "text": "can you suggest some please?",
+                "intent": "RecommendFlowers",
+                "entities": []
+            },
+            {
+                "text": "cancel purchase",
+                "intent": "Cancel",
+                "entities": []
+            },
+            {
+                "text": "cannot decide on my own",
+                "intent": "RecommendFlowers",
+                "entities": []
+            },
+            {
+                "text": "difficult to choose",
+                "intent": "RecommendFlowers",
+                "entities": []
+            },
+            {
+                "text": "exit",
+                "intent": "Cancel",
+                "entities": []
+            },
+            {
+                "text": "get some white roses please",
+                "intent": "PurchaseFlowers",
+                "entities": []
+            },
+            {
+                "text": "girlfriend",
+                "intent": "PurchaseFlowers",
+                "entities": []
+            },
+            {
+                "text": "hard time making a choice",
+                "intent": "RecommendFlowers",
+                "entities": []
+            },
+            {
+                "text": "help making a decision",
+                "intent": "RecommendFlowers",
+                "entities": []
+            },
+            {
+                "text": "i don't care",
+                "intent": "None",
+                "entities": []
+            },
+            {
+                "text": "i like all types",
+                "intent": "RecommendFlowers",
+                "entities": []
+            },
+            {
+                "text": "ignore",
+                "intent": "Cancel",
+                "entities": []
+            },
+            {
+                "text": "love some tulips",
+                "intent": "PurchaseFlowers",
+                "entities": []
+            },
+            {
+                "text": "need some colour",
+                "intent": "PurchaseFlowers",
+                "entities": []
+            },
+            {
+                "text": "purchase some flowers",
+                "intent": "PurchaseFlowers",
+                "entities": []
+            },
+            {
+                "text": "something bell shaped",
+                "intent": "PurchaseFlowers",
+                "entities": []
+            },
+            {
+                "text": "stop that",
+                "intent": "Cancel",
+                "entities": []
+            },
+            {
+                "text": "they're all great",
+                "intent": "RecommendFlowers",
+                "entities": []
+            },
+            {
+                "text": "trying to find some flowers",
+                "intent": "PurchaseFlowers",
+                "entities": []
+            },
+            {
+                "text": "want to buy a flower",
+                "intent": "PurchaseFlowers",
+                "entities": []
+            },
+            {
+                "text": "water lily please",
+                "intent": "PurchaseFlowers",
+                "entities": []
+            },
+            {
+                "text": "what flowers would you suggest?",
+                "intent": "RecommendFlowers",
+                "entities": []
+            },
+            {
+                "text": "what types to you like?",
+                "intent": "RecommendFlowers",
+                "entities": []
+            },
+            {
+                "text": "wife",
+                "intent": "PurchaseFlowers",
+                "entities": []
+            }
+        ]
     }
-  ],
-  "entities": [],
-  "composites": [
-    {
-      "name": "Type",
-      "children": [
-        "Flower"
-      ],
-      "roles": []
-    },
-    {
-      "name": "Item",
-      "children": [
-        "Flower"
-      ],
-      "roles": []
-    }
-  ],
-  "closedLists": [
-    {
-      "name": "Flower",
-      "subLists": [
-        {
-          "canonicalForm": "Astilbe",
-          "list": [
-            "astilbe",
-            "false spirea",
-            "false goats beard"
-          ]
-        },
-        {
-          "canonicalForm": "Bellflower",
-          "list": [
-            "bellflower",
-            "bell shaped",
-            "little bell",
-            "bell flower",
-            "campanula"
-          ]
-        },
-        {
-          "canonicalForm": "Black Eyed Susan",
-          "list": [
-            "black_eyed_susan",
-            "black eyed susan"
-          ]
-        },
-        {
-          "canonicalForm": "Calendula",
-          "list": [
-            "calendula",
-            "marigold"
-          ]
-        },
-        {
-          "canonicalForm": "California Poppy",
-          "list": [
-            "golden poppy",
-            "california poppy",
-            "cup of gold",
-            "california sunlight",
-            "poppy"
-          ]
-        },
-        {
-          "canonicalForm": "Carnation",
-          "list": [
-            "clove pink",
-            "flower of god",
-            "carnation"
-          ]
-        },
-        {
-          "canonicalForm": "Common Daisy",
-          "list": [
-            "lawn daisy",
-            "English daisy",
-            "common daisy",
-            "common_daisy",
-            "daisy"
-          ]
-        },
-        {
-          "canonicalForm": "Coreopsis",
-          "list": [
-            "calliopsis",
-            "tickseed",
-            "coreopsis"
-          ]
-        },
-        {
-          "canonicalForm": "Daffodil",
-          "list": [
-            "narcissus",
-            "jonquil",
-            "daffodil"
-          ]
-        },
-        {
-          "canonicalForm": "Dandelion",
-          "list": [
-            "taraxacology",
-            "dandelion"
-          ]
-        },
-        {
-          "canonicalForm": "Iris",
-          "list": [
-            "iris"
-          ]
-        },
-        {
-          "canonicalForm": "Magnolia",
-          "list": [
-            "star magnolia",
-            "magnolia"
-          ]
-        },
-        {
-          "canonicalForm": "Rose",
-          "list": [
-            "English rose",
-            "Rosa",
-            "rosa",
-            "rose"
-          ]
-        },
-        {
-          "canonicalForm": "Sunflower",
-          "list": [
-            "Sun",
-            "sun",
-            "giant",
-            "Sun Flower",
-            "SunFlower",
-            "sunflower"
-          ]
-        },
-        {
-          "canonicalForm": "Tulip",
-          "list": [
-            "blotch",
-            "tulip"
-          ]
-        },
-        {
-          "canonicalForm": "Water Lily",
-          "list": [
-            "Water Lilies",
-            "water lilies",
-            "water lily",
-            "water_lily"
-          ]
-        }
-      ],
-      "roles": []
-    }
-  ],
-  "patternAnyEntities": [],
-  "regex_entities": [],
-  "prebuiltEntities": [],
-  "model_features": [],
-  "regex_features": [],
-  "patterns": [],
-  "utterances": [
-    {
-      "text": "want to buy a flower",
-      "intent": "PurchaseFlowers",
-      "entities": []
-    },
-    {
-      "text": "purchase some flowers",
-      "intent": "PurchaseFlowers",
-      "entities": []
-    },
-    {
-      "text": "girlfriend",
-      "intent": "PurchaseFlowers",
-      "entities": []
-    },
-    {
-      "text": "wife",
-      "intent": "PurchaseFlowers",
-      "entities": []
-    },
-    {
-      "text": "anniversary",
-      "intent": "PurchaseFlowers",
-      "entities": []
-    },
-    {
-      "text": "trying to find some flowers",
-      "intent": "PurchaseFlowers",
-      "entities": []
-    },
-    {
-      "text": "need some colour",
-      "intent": "PurchaseFlowers",
-      "entities": []
-    },
-    {
-      "text": "buy some red roses",
-      "intent": "PurchaseFlowers",
-      "entities": [
-        {
-          "entity": "Flower",
-          "startPos": 14,
-          "endPos": 18
-        }
-      ]
-    },
-    {
-      "text": "get some white roses please",
-      "intent": "PurchaseFlowers",
-      "entities": [
-        {
-          "entity": "Flower",
-          "startPos": 16,
-          "endPos": 20
-        }
-      ]
-    },
-    {
-      "text": "buy astile",
-      "intent": "PurchaseFlowers",
-      "entities": [
-        {
-          "entity": "Flower",
-          "startPos": 4,
-          "endPos": 10
-        }
-      ]
-    },
-    {
-      "text": "buy a beautiful iris",
-      "intent": "PurchaseFlowers",
-      "entities": [
-        {
-          "entity": "Flower",
-          "startPos": 17,
-          "endPos": 20
-        }
-      ]
-    },
-    {
-      "text": "love some tulips",
-      "intent": "PurchaseFlowers",
-      "entities": [
-        {
-          "entity": "Flower",
-          "startPos": 10,
-          "endPos": 15
-        }
-      ]
-    },
-    {
-      "text": "water lily please",
-      "intent": "PurchaseFlowers",
-      "entities": [
-        {
-          "entity": "Flower",
-          "startPos": 0,
-          "endPos": 9
-        }
-      ]
-    },
-    {
-      "text": "something bell shaped",
-      "intent": "PurchaseFlowers",
-      "entities": [
-        {
-          "entity": "Flower",
-          "startPos": 10,
-          "endPos": 13
-        }
-      ]
-    },
-    {
-      "text": "can you suggest some please?",
-      "intent": "RecommendFlowers",
-      "entities": []
-    },
-    {
-      "text": "what flowers would you suggest?",
-      "intent": "RecommendFlowers",
-      "entities": []
-    },
-    {
-      "text": "what types to you like?",
-      "intent": "RecommendFlowers",
-      "entities": []
-    },
-    {
-      "text": "i like all types",
-      "intent": "RecommendFlowers",
-      "entities": []
-    },
-    {
-      "text": "they're all great",
-      "intent": "RecommendFlowers",
-      "entities": []
-    },
-    {
-      "text": "difficult to choose",
-      "intent": "RecommendFlowers",
-      "entities": []
-    },
-    {
-      "text": "cannot decide on my own",
-      "intent": "RecommendFlowers",
-      "entities": []
-    },
-    {
-      "text": "hard time making a choice",
-      "intent": "RecommendFlowers",
-      "entities": []
-    },
-    {
-      "text": "help making a decision",
-      "intent": "RecommendFlowers",
-      "entities": []
-    },
-    {
-      "text": "stop that",
-      "intent": "Cancel",
-      "entities": []
-    },
-    {
-      "text": "bye",
-      "intent": "Cancel",
-      "entities": []
-    },
-    {
-      "text": "cancel purchase",
-      "intent": "Cancel",
-      "entities": []
-    },
-    {
-      "text": "exit",
-      "intent": "Cancel",
-      "entities": []
-    },
-    {
-      "text": "ignore",
-      "intent": "Cancel",
-      "entities": []
-    },
-    {
-      "text": "i don't care",
-      "intent": "None",
-      "entities": []
-    }
-  ],
-  "settings": []
 }
