@@ -8,7 +8,7 @@ import pandas as pd
 import random
 import time
 
-total_records = 20000
+total_records = 20000  # sets of purchases
 total_users = 64
 start_date = "2023-05-01T00:00:00"
 end_date = "2023-05-05T00:00:00"

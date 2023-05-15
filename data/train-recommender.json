@@ -1,11 +1,11 @@
 {
    "description": "FlowerBot recommendations model",
-   "blobContainerName": "transactions",
+   "blobContainerName": "flowerbot",
    "usageRelativePath": "users.csv",
    "catalogFileRelativePath": "flowers.catalog",
    "supportThreshold": 3,
    "cooccurrenceUnit": "User",
-   "similarityFunction": "Cooccurrence",
+   "similarityFunction": "Jaccard",
    "enableColdItemPlacement": true,
    "enableColdToColdRecommendations": true,
    "enableUserAffinity": false,

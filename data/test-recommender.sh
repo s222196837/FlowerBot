@@ -1,9 +1,9 @@
 #!/bin/sh
 
 SERVICE="flowerbotyrpafrhf6sreews"
-APIKEY="YWs2NXp1ZTRqaXh3aQ=="
-MODEL="ebd580dc-6954-4fe0-ac13-fdc45bb22f88"
-ITEM="P00013"
+APIKEY="bmF1YXdhY3pyeXJjdw=="
+MODEL="4871529f-c9ac-4a1d-af27-70c58e6d2e71"
+ITEM="P00001"
 
 # test a recommendation
 
