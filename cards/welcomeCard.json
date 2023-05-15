@@ -21,7 +21,7 @@
       "type": "TextBlock",
       "size": "default",
       "isSubtle": "true",
-      "text": "I can help you with plant identification and purchases from my nursery.  Upload a photo or let me know what type of flowers you like.  I can also make some suggestions for you based on your purchase history.",
+      "text": "I can help you with plant identification and purchases from my nursery.  Upload a photo or let me know what type of flowers you like.  I can also make some suggestions for you based on similar purchases made in the past.",
       "wrap": true,
       "maxLines": 0
     }

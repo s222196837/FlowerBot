@@ -46,9 +46,9 @@ class PurchaseDetails:
         columns = ['item', 'name', 'group']
         catalog = pd.read_csv(flowers, header=None, names=columns)
         catalog = pd.DataFrame(catalog, columns=['item', 'name'])
+        inverse = dict([(i,n) for n, i in zip(catalog.name, catalog.item)])
         catalog = dict([(n,i) for n, i in zip(catalog.name, catalog.item)])
         self.supported_flowers = catalog
-        inverse = dict([(i,n) for n, i in zip(catalog.name, catalog.item)])
         self.supported_items = inverse  # reverse lookup
 
     def item_catalog(self, flower):
@@ -94,8 +94,13 @@ class PurchaseDetails:
         req.add_header('Content-Type', 'application/json')
         req.add_header('x-api-key', CONFIG.RECOMMEND_API_KEY)
 
-        resp = request.urlopen(req)
-        return resp.read()
+        try:
+            resp = request.urlopen(req)
+            return resp.read()
+        except: # recommender endpoint unavailable
+            pass
+        return []
+
 
     def recommendation(self, item):
         """ query endpoint for top recommendation (item-to-item) """
@@ -113,7 +118,7 @@ class PurchaseDetails:
                 max_score = score
                 item_id = recommendation['recommendedItemId'].upper()
 
-        return self.purchases.flower_catalog(item_id)
+        return self.flower_catalog(item_id)
 
 
     def fetch_classifications(self, path):
@@ -122,8 +127,11 @@ class PurchaseDetails:
         cs = ApiKeyCredentials(in_headers={"Prediction-key": CONFIG.CLASSIFY_API_KEY})
         predictor = CustomVisionPredictionClient(CONFIG.CLASSIFY_URL, cs)
 
-        with open(path, mode="rb") as image:
-            return predictor.detect_image(CONFIG.CLASSIFY_PROJECT, CONFIG.CLASSIFY_ITERATION, image)
+        try:
+            with open(path, mode="rb") as image:
+                return predictor.detect_image(CONFIG.CLASSIFY_PROJECT, CONFIG.CLASSIFY_ITERATION, image)
+        except: # classification endpoint unavailable
+            pass
         return []
 
     def classification(self, path):
