@@ -13,12 +13,12 @@ class DefaultConfig:
     BEST_FLOWER = 'sunflower'
 
     # Image classification services
-    CLASSIFY_URL = "https://flowerbot002-prediction.cognitiveservices.azure.com/"
-    CLASSIFY_API_KEY = "395816cd19174d6a91be4ee588053fee"
-    CLASSIFY_PROJECT = "5478e771-8f36-4b82-a455-9bc728158288"
-    CLASSIFY_ITERATION = "flowerbot-8be0259d-9193-4fb5-a902-10ef62840711"
+    CLASSIFY_URL = "https://flowerbot-prediction.cognitiveservices.azure.com/"
+    CLASSIFY_API_KEY = "76a6fbacaeb242818c613d1ee3bcb162"
+    CLASSIFY_PROJECT = "82d55c80-b09c-4fb6-afe7-d4a0ed2686a3"
+    CLASSIFY_ITERATION = "flowerbot-c78977fc-25b7-4eb0-9678-dbe5d7b65a7a"
 
     # Product recommendation services
     RECOMMEND_URL = "https://flowerbotyrpafrhf6sreews.azurewebsites.net/api/models/"
-    RECOMMEND_MODEL = "ebd580dc-6954-4fe0-ac13-fdc45bb22f88"
-    RECOMMEND_API_KEY = "YWs2NXp1ZTRqaXh3aQ=="
+    RECOMMEND_MODEL = "4871529f-c9ac-4a1d-af27-70c58e6d2e71"
+    RECOMMEND_API_KEY = "bmF1YXdhY3pyeXJjdw=="

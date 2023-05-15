@@ -9,6 +9,7 @@ from botbuilder.schema import Activity, Attachment, AttachmentData
 from botbuilder.dialogs import Dialog
 from helpers.dialog_helper import DialogHelper
 
+from purchase_details import PurchaseDetails
 
 class DialogBot(ActivityHandler):
     def __init__(
@@ -59,10 +60,10 @@ class DialogBot(ActivityHandler):
             attachment_info = await self.download_attachment_and_write(attachment)
             if "filename" in attachment_info:
 
-                ### TODO: classify this image, send a response ###
+                ### classify this image, send a response ###
                 path = attachment_info['local_path']
-                flower = 'sunflower'
-                #flower = self.purchase_details.classify(path)
+                purchase_details = PurchaseDetails()
+                flower = purchase_details.classification(path)
 
                 if flower is not None:
                     if flower[0] in ['a', 'e', 'i', 'o', 'u']:

@@ -68,8 +68,7 @@ class PurchaseDetails:
         flower = flower.lower()
         flower = flower.replace(' ', '_')
         flower = flower.replace('  ', '_')
-        flower = flower.rstrip("s")
-        flower = flower.rstrip("'")
+        flower = flower.rstrip("_")
         if flower in self.supported_flowers:
             self.item = flower
         else:
@@ -95,8 +94,11 @@ class PurchaseDetails:
         req.add_header('x-api-key', CONFIG.RECOMMEND_API_KEY)
 
         try:
-            resp = request.urlopen(req)
-            return resp.read()
+            response = request.urlopen(req)
+            respbody = response.read()
+            respjson = json.loads(respbody.decode("utf-8"))
+            return respjson
+
         except: # recommender endpoint unavailable
             pass
         return []
@@ -108,6 +110,7 @@ class PurchaseDetails:
             item = CONFIG.BEST_FLOWER
         item_id = self.item_catalog(item)
 
+        # talk to the endpoint
         recommendations = self.fetch_recommendations(item_id)
 
         # unpack the result and find the top recommendation
@@ -118,7 +121,9 @@ class PurchaseDetails:
                 max_score = score
                 item_id = recommendation['recommendedItemId'].upper()
 
-        return self.flower_catalog(item_id)
+        result = self.flower_catalog(item_id)
+        #print('Recommending:', item_id, result)
+        return result
 
 
     def fetch_classifications(self, path):
@@ -137,15 +142,17 @@ class PurchaseDetails:
     def classification(self, path):
         """ query endpoint for top classification (image-to-tag) """
        
+        print('Classifying image:', path)
         classifications = self.fetch_classifications(path)
 
         # unpack the result and find the top classification
         item_tag = None
         max_score = 0.0
-        for prediction in results.predictions:
+        for prediction in classifications.predictions:
             score = prediction.probability
             if score >= max_score:
                 max_score = score
                 item_tag = prediction.tag_name
 
+        #print('Classified image:', item_tag)
         return item_tag
