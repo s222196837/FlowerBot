@@ -53,27 +53,32 @@ catalog = pd.DataFrame(catalog, columns=['item', 'name'])
 catalog = dict([(n,i) for n, i in zip(catalog.name, catalog.item)])
 #print(catalog)
 
-# real work start here
+# real work start here - generating users.csv
 plants = random.choices(flowers, flower_weights, k = total_records)
 for result in plants:
+    # pick a random timestamp and user
+    datestamp = random_date(start_date, end_date, random.random())
     userid = random.randint(1, total_users)
 
     # users in first 10% of ID range only select traditional flowers
     if userid < total_users / 10:
        result = 'traditional'
 
-    if result == 'cheerful':
-       flower = random.choices(cheerful_flowers, cheerful_weights)
-    elif result == 'exotic':
-       flower = random.choices(exotic_flowers, exotic_weights)
-    elif result == 'unusual':
-       flower = random.choices(unusual_flowers, unusual_weights)
-    else:
-       flower = random.choices(traditional_flowers, traditional_weights)
+    flowers = []
+    # mimic user action of buying a range of up to N flowers at once
+    for f in range(random.randrange(16)):
+        if result == 'cheerful':
+            flowers.append(random.choices(cheerful_flowers, cheerful_weights))
+        elif result == 'exotic':
+            flowers.append(random.choices(exotic_flowers, exotic_weights))
+        elif result == 'unusual':
+            flowers.append(random.choices(unusual_flowers, unusual_weights))
+        else:
+            flowers.append(random.choices(traditional_flowers, traditional_weights))
 
-    # Format: userid, itemid, timestamp
-    itemid = catalog[flower[0]]
-    datestamp = random_date(start_date, end_date, random.random())
-
-    print("U%05d,%s,%s,Purchase" % (userid, itemid, datestamp))
+    for f in flowers:
+        flower = f[0]
+        itemid = catalog[flower]
+        # Format: userid, itemid, timestamp
+        print("U%05d,%s,%s,Purchase" % (userid, itemid, datestamp))
 
